@@ -1,0 +1,18 @@
+name = "doodad-api"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+# The app sends to https://api.thedoodad.com (the Doodad repo's TELEMETRY_URL).
+# Needs thedoodad.com on this Cloudflare account; see README.
+routes = [{ pattern = "api.thedoodad.com", custom_domain = true }]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "doodad-api"
+# From `wrangler d1 create doodad-api` (README, step 2).
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+[observability]
+# Request logs would hold IPs: off. Errors only, from the Worker's own code.
+enabled = false
